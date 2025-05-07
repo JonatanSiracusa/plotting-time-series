@@ -1,0 +1,42 @@
+DF
+
+close
+adj close, returns
+
+open, high, low, close
+open, high, low, close, volume
+open, high, low, close, adj close
+
+open, high, low, close, adj close, volume
+
+open, high, low, close, adj close, volume, log_ret, sim_ret, volat
+
+solo returns de todos los tickers
+
+ohlcv
+log returns sobre adj close
+volat.. sobre adj close
+
+
+
+close o adj close, volat, return
+close o adj close.. para normalizar
+returns vs volat
+returns
+
+
+** metodo que le agregue a todos los DF o a un ticker en particular lo que hace una function externa
+** metodo genere returns
+** metodo genere volats
+** metodo genere returns y volats
+
+
+** df returns (self, log/simple, close/adj close)
+** df returns y volat (self, log/simple, close/adj close, window)
+
+** insertar cols nuevas en los df vacios: 			
+** insertar cols con calculos a partir del mismo df: add_column
+** crear df de returns y volats.. metodo de clase q llama a la fc
+
+
+
