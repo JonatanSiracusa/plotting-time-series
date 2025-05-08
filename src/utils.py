@@ -4,6 +4,11 @@ import time
 import datetime as dt
 import yfinance as yf
 from IPython.display import display, HTML, Javascript
+import plotly.graph_objects as go
+from IPython.display import Image, display
+
+import base64
+import plotly.io as pio
 
 
 def get_data(df, categoria, ticker):
@@ -287,11 +292,37 @@ def undo_show_df():
 	pd.DataFrame._repr_html_ = _original_repr_html_
 
 	display(Javascript("""
-        const styleElements = document.querySelectorAll('style');
-        styleElements.forEach(el => {
-            if (el.innerText.includes('.scrollable-table-container')) {
-                el.remove();
-            }
-        });
-    """))
+		const styleElements = document.querySelectorAll('style');
+		styleElements.forEach(el => {
+			if (el.innerText.includes('.scrollable-table-container')) {
+				el.remove();
+			}
+		});
+	"""))
 	
+
+
+def mostrar_plotly_para_github(fig, ancho=800, alto=600):
+	"""
+	Muestra un gráfico de Plotly como imagen estática,
+	ideal para que sea visible en GitHub.
+	"""
+	# # Exporta el gráfico como imagen PNG en memoria
+	# img_bytes = fig.to_image(format="png", width=ancho, height=alto)
+	
+	# # Muestra la imagen en el notebook
+	# # display(Image(img_bytes))
+	# display(HTML(f'<img src="data:image/png;base64,{img_bytes.encode("base64").decode()}" />'))
+
+	try:
+		img_bytes = fig.to_image(format="png", engine="kaleido")
+		display(Image(img_bytes))
+
+		img_base64 = base64.b64encode(img_bytes).decode('utf-8')
+		html = f'<img src="data:image/png;base64,{img_base64}"/>'
+		display(HTML(html))
+		
+	except Exception as e:
+		print("Error al intentar convertir la figura en imagen:")
+		print(e)
+
